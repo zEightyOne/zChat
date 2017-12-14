@@ -10,9 +10,10 @@ This will be implemented into larger communication application
 
 To run, make sure you have installed Node.js I used the Current but I'm sure LTS works fine
 
-from the project root directory:
+From the project root directory:
 
 npm install
+
 node server.js
 
 
