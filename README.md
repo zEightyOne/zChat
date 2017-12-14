@@ -12,8 +12,10 @@ To run, make sure you have installed Node.js I used the Current but I'm sure LTS
 
 from the project root directory:
 
-npm install // This might actually happen by default.
+npm install
 node server.js
+
+
 
 Have fun :)
 
