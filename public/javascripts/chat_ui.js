@@ -9,14 +9,17 @@ function divSystemContentElement(message) {
 	return $('<div></div>').html('<i>' + message + '</i>') //Trusted text - just take it as is
 }
 
+
 function processUserInput(chatApp, socket) {
-	var message = $('#send-message').val() //non-JQuery: document.getElementById('send-message').value
+//	var message = $('#send-message').val() //non-JQuery: document.getElementById('send-message').value
+	var message = vueContent.sendMessage;
 	var systemMessage;
 
 	if (message.charAt(0) == '/') {
 		systemMessage = chatApp.processCommand(message);
 		if (systemMessage) {
-			$('#messages').append(divSystemContentElement(systemMessage));
+//			$('#messages').append(divSystemContentElement(systemMessage));
+			vueContent.messages.push(systemMessage);
 			// 
 			//non-JQuery: document.getElementById('messages').innerHTML += systemMessage
 			//NEVER do it this way though if you have listeners on these elements instead:
@@ -26,13 +29,17 @@ function processUserInput(chatApp, socket) {
 			//
 		}
 	}	else {
-		chatApp.sendMessage($('#room').text(),message); //Broadcast message to the room
+//		chatApp.sendMessage($('#room').text(),message); //Broadcast message to the room
+		chatApp.sendMessage(vueContent.room,message);
 		//non-JQuery: chatApp.sendMessage(document.getElementById('send-message').textContent, message);
-		$('#messages').append(divEscapedContentElement(message)); 
+//		$('#messages').append(divEscapedContentElement(message)); 
+		vueContent.messages.push(message); //Vue automatically escapes data
+
 		//non-JQuery: var content = document.createTextNode(message); document.getElementById('messages').appendChild(content)
 		$('#messages').scrollTop($('#messages').prop('scrollHeight')); //TODO: Research non-JQuery scrollTop https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop
 	}
-	$('#send-message').val(''); //document.getElementById('send-message').value = '';
+//	$('#send-message').val(''); //document.getElementById('send-message').value = '';
+	vueContent.sendMessage = '';
 }
 
 var socket = io.connect();
@@ -55,28 +62,33 @@ $(document).ready(function() { //non-JQuery: document.addEventListener("DOMConte
 		} else {
 			message = result.message;
 		}
-		$('#messages').append(divSystemContentElement(message)); //non-JQuery: var content = document.createTextNode(message); document.getElementById('messages').appendChild(content) 
+//		$('#messages').append(divSystemContentElement(message)); //non-JQuery: var content = document.createTextNode(message); document.getElementById('messages').appendChild(content) 
+		vueContent.messages.push(message);
 	});
 
 
 	socket.on('joinResult', function(result){ //LISTENER for when the server calls emit('joinResult',result)
 		$('#room').text(result.room); //non-JQuery document.getElementById('room').textContent = room
-		$('#messages').append(divSystemContentElement('Room changed.'));
+//		$('#messages').append(divSystemContentElement('Room changed.'));
+		vueContent.messages.push('Room changed.');		
 		//non-JQuery: var content = document.createTextNode('Room changed.'); document.getElementById('messages').appendChild(content)
 	});
 
 	socket.on('message', function(message) { //LISTENER for when the server calls emit('message',message)
-		var newElement = $('<div></div>').text(message.text); //TODO: why not call var newElement = divEscapedContentElement(message.text)
-		$('#messages').append(newElement); //non-JQuery: document.getElementById('messages').appendChild(newElement) 
+//		var newElement = $('<div></div>').text(message.text); //TODO: why not call var newElement = divEscapedContentElement(message.text)
+//		$('#messages').append(newElement); //non-JQuery: document.getElementById('messages').appendChild(newElement) 
+		vueContent.messages.push(message.text);		
 	});
 
 	socket.on('rooms', function(rooms) { //LISTENER for when the server calls emit('rooms', rooms)
 		numberOfCalls++;
-		$('#room-list').empty(); //Not sure why this is being used as this is not a list
+//		$('#room-list').empty(); //Not sure why this is being used as this is not a list
+		vueContent.roomList = [];
 		for(var room in rooms) { //Display list of rooms
 			room = room.substring(1,room.length);
 			if (room != '') {
-				$('#room-list').append(divEscapedContentElement(room));
+//				$('#room-list').append(divEscapedContentElement(room));
+				vueContent.roomList.push(room);
 			}
 		}
 
