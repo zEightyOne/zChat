@@ -10,20 +10,19 @@ function divSystemContentElement(message) {
 }
 
 
-function processUserInput(chatApp, socket) {
+function processUserInput() {
 	var message = vueContent.sendMessage;
 	var systemMessage;
 
 	if (message.charAt(0) == '/') {
-		systemMessage = chatApp.processCommand(message);
+		systemMessage = vueContent.chatApp.processCommand(message);
 		if (systemMessage) {
 			vueContent.messages.push(systemMessage);
 		}
 	}	else {
-		chatApp.sendMessage(vueContent.room,message);
+		vueContent.chatApp.sendMessage(vueContent.room,message);
 		vueContent.messages.push(message); //Vue automatically escapes data
 
-		$('#messages').scrollTop($('#messages').prop('scrollHeight')); //TODO: Research non-JQuery scrollTop https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop
 	}
 	vueContent.sendMessage = '';
 }

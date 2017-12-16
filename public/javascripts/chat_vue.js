@@ -9,12 +9,21 @@ var vueContent = new Vue( {
 		sendMessage: '',
 		messages: [],
 		roomList: [],
-		room: ''
+		room: '',
+		chatApp: null
 	},
 	methods: {
+		onRoomListClick: function(e) {
+			vueContent.chatApp.processCommand('/join ' + e.target.textContent ); //Join room when you click on it
+			vueContent.$refs.refSendMessage.focus();
+		},
+		onFormSubmit: function(e) {
+			processUserInput();
+			return false;
+		},
 		init: function(){
 			var socket = io.connect();
-			var chatApp = new Chat(socket); 
+			this.chatApp = new Chat(socket); 
 
 			//EVENT HANDLERS
 
@@ -29,8 +38,8 @@ var vueContent = new Vue( {
 			});
 
 			socket.on('joinResult', function(result){ //LISTENER for when the server calls emit('joinResult',result)
-				$('#room').text(result.room); //non-JQuery document.getElementById('room').textContent = room
-				vueContent.messages.push('Room changed.');		
+				vueContent.room = result.room;
+				vueContent.messages.push('Room changed to ' + result.room);		
 			});
 
 			socket.on('message', function(message) { //LISTENER for when the server calls emit('message',message)
@@ -47,27 +56,20 @@ var vueContent = new Vue( {
 					}
 				}
 
-			//END-EVENT HANDLERS
-
-			$('#room-list div').click(function() { //EVENT HANDLER: ONCLICK
-					chatApp.processCommand('/join ' + $(this).text() ); //Join room when you click on it
-					$('#send-message').focus();
-				});
-			});
+			 });
 
 			setInterval(function() { //Reqest list of room every 1000 ms
 				socket.emit('rooms');
 			}, 1000); 
 
-			$('#send-message').focus();
-
-			$('#send-form').submit(function() { //EVENT HANDLER: ONSUBMIT
-				processUserInput(chatApp, socket);
-				return false;
-			});
+			this.$refs.refSendMessage.focus();
 		}
-	},	
+}, 
 	mounted: function(){
 			this.init();
-			}
-	});
+		},
+	updated: function(){ //Used for Vue instance updates - for updates at global scope use Vue.nextTick(function() {...}
+		var refMessages = vueContent.$refs.refMessages;
+		refMessages.scrollTop = refMessages.scrollHeight;
+		}
+});
