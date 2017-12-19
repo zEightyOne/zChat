@@ -3,7 +3,8 @@
 	"version": "0.0.1",
 	"description": "Minimalist multiroom chat server",
 	"scripts": {
-		"dev": "nodemon ./server.js"
+		"dev": "nodemon -e html,css ./server.js",
+		"inspect": "nodemon --inspect ./server.js"
 	},
 	"dependencies": {
 		"socket.io": "~0.9.6",

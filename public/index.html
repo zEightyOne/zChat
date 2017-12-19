@@ -3,26 +3,29 @@
 <head>
 	<title>Cooper Chat</title>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" /> <!-- , user-scalable=no" /> -->
+	<link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet"> 	
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
 	<script type="text/javascript" src="https://unpkg.com/vue"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js" ></script>
-<!--	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script> -->
 </head>
 <body>
 	<div id='vue-content'>
 		<img alt="Chat" v-bind:class="{logo : isThirsty}" v-bind:src="appLogo">
-		<div id='room'>{{room}}</div>
-		<div id='room-list' v-on:click='onRoomListClick'>
-			<div v-for="y in roomList">{{ y }}</div>
+		<div id='room'>You are currently in {{room}}</div>
+
+		<div class='outputCenter'>		
+			<div ref='refMessages' id='messages'>
+			  <div class='message' v-for="message in messages"><span >{{ message }}</span></div>
+	 		</div>
+			<div id='room-list' v-on:click='onRoomListClick'>
+				<div id='available-room' v-for="y in roomList">{{ y }}</div>
+			</div>	 		
 		</div>
-		<div ref='refMessages' id='messages'>
-		  <div v-for="message in messages">{{ message }}</div>
- 		</div>
 
 		<form id='send-form' v-on:submit.prevent='onFormSubmit'>
 			<input id='send-message' ref='refSendMessage' v-model='sendMessage'/>
 			<input id='send-button' type='submit' value='Send'/>
-
 			<div id='help'>
 				Chat commands:
 				<ul>

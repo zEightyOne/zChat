@@ -1,63 +1,102 @@
 body {
-	padding: 50px;
-	font:14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	border: 1px solid blue;
-	margin: 2em;
+    font-family:'Barlow', sans-serif;
+    font-size: 100%
 }
 
 a {
 	color: #00B7FF;
 }
 .logo {
-	height: 20%;
-	width: 50%
-	margin-bottom: 2em;
+	width: 20%;
 }
 
 #vue-content {
-	width: 80%;
-	max-width: 800px;
-	margin-left: auto;
-	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;	
+	border: .1em solid rgba(100, 66, 239, 0.5);
+	height: 100%
+}
+
+#vue-content img { 
+	flex: 5
+}
+
+#vue-content #send-form {
+	flex: 10
+}
+
+#vue-content #room {
+	flex: 2
+}
+
+#vue-content .outputCenter {
+	flex: 50
+}
+
+.outputCenter {
+	display: flex;
+}
+
+.outputCenter #messages {
+	flex: 8;
+}
+
+.outputCenter #room-list {
+	flex: 1;
 }
 
 #room {
-	background-color: #ddd;
-	padding: 1em .5em;
-	margin-bottom: 1em;
+	background-color: rgba(100, 66, 239, 0.2);
+	padding: 1em;
 }
 
+
 #messages {
-	width: 75%;
-	height: 80%;
 	overflow: auto;
 	background-color: #eee;
-	margin-bottom: 1em;
-	margin-right: 10px;
+	border: .1em solid rgba(100, 66, 239, 0.5);
+	margin: 1em
 }
 
 #room-list {
-	float: right;
-	width: 100px;
-	height: 300px;
-	overflow: auto;
-}
-
-#room-list div {
-	border-bottom: 1px solid #eee;
+	margin-top: 1em;
 }
 
 #room-list div:hover {
 	background-color: #ddd;
 }
 
+#available-room {
+	overflow: scroll;
+	border-bottom: .5em solid rgba(100, 66, 239, 0.5);
+	border-left: .1em solid rgba(100, 66, 239, 0.5);
+	padding-left: .1em;
+	margin-right: .1em
+}
+
 #send-message {
-	width: 75%
-	margin-bottom: 1em;
-	margin-right: 1em;
+	width: 50%
+}
+
+#send-form {
+	margin-left: 1em
 }
 
 #help {
-	font: 10px "Lucida Grande", Helvetica, Arial, sans-serif;
+	font: 75% "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.message {
+	margin: 1em .25em;
+	text-align: right ;
+}
+
+.message span{
+	background-color: rgba(31, 234, 234, 0.3);
+	color: black;	
+	border-radius: 20px;
+	padding: .25em
+
 }
 
