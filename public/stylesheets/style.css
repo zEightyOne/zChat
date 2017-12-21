@@ -103,3 +103,47 @@ a {
 
 }
 
+.friend-message {
+	margin: 1em .25em;
+	text-align: right; ;
+}
+
+.friend-message .main-text {
+	background-color: rgba(31, 100, 234, 0.3);
+	color: black;	
+	border-radius: 10px;
+	padding: .25em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.system-message {
+	margin: 1em .25em;
+	text-align: right;
+}
+
+.system-message .main-text {
+	background-color: rgba(31, 234, 234, 0.3);
+	color: black;	
+	border-radius: 10px;
+	padding: .25em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.user-message {
+	margin: 1em .25em;
+	text-align: left ;
+}
+
+.user-message .main-text {
+	background-color: rgba(31, 31, 234, 0.3);
+	color: black;	
+	border-radius: 10px;
+	padding: .25em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.prompt {
+	font-size: 80%
+}

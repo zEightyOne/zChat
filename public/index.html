@@ -16,7 +16,23 @@
 
 		<div class='outputCenter'>		
 			<div ref='refMessages' id='messages'>
-			  <div class='message' v-for="message in messages"><span >{{ message }}</span></div>
+			  <div v-for="message in messages">
+			  	<div v-if="message.source === 'System'">
+			  		<div class='system-message'>
+			  			<span class='main-text'>{{ message.text }}</span>
+			  		</div>
+			  	</div>
+			  	<div v-else-if='message.source == name'>
+			  		<div class='user-message'>
+			  			<span class='prompt'>You say:</span><span class='main-text'>{{ message.text }}</span>
+			  		</div>
+			  	</div>
+			  	<div v-else>
+			  		<div class='friend-message'>
+			  			<span class='prompt'>{{message.source}} says:</span> <span class='main-text'>{{ message.text }}</span>
+			  		</div>
+			  	</div>				  				  	
+			  </div>
 	 		</div>
 			<div id='room-list' v-on:click='onRoomListClick'>
 				<div id='available-room' v-for="y in roomList">{{ y }}</div>

@@ -1,6 +1,6 @@
 {
 	"name": "chatrooms",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "Minimalist multiroom chat server",
 	"scripts": {
 		"dev": "nodemon -e html,css ./server.js",
