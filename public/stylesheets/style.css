@@ -1,54 +1,149 @@
 body {
-	padding: 50px;
-	font:14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-family:'Barlow', sans-serif;
+    font-size: 100%
 }
 
 a {
 	color: #00B7FF;
 }
+.logo {
+	width: 20%;
+}
 
-#content {
-	width: 800px;
-	margin-left: auto;
-	margin-right: auto;
+#vue-content {
+/*	display: flex; */
+	display: block; 
+	flex-direction: column;
+	box-sizing: border-box;	
+	border: .1em solid rgba(100, 66, 239, 0.5);
+	height: 100%
+}
+
+#vue-content img { 
+	height: 15%
+}
+
+#vue-content #send-form {
+	height: 30%
+}
+
+#vue-content #room {
+	height: 5%
+}
+
+#vue-content .outputCenter {
+	height: 50% 
+}
+
+.outputCenter {
+	display: flex;
+}
+
+.outputCenter #messages {
+	flex: 7;
+}
+
+.outputCenter #room-list {
+	flex: 1;
 }
 
 #room {
-	background-color: #ddd;
-	margin-bottom: 1em;
+	background-color: rgba(100, 66, 239, 0.2);
+	padding: 1em; 
 }
 
+
 #messages {
-	width: 690px;
-	height: 300px;
 	overflow: auto;
 	background-color: #eee;
-	margin-bottom: 1em;
-	margin-right: 10px;
+	border: .1em solid rgba(100, 66, 239, 0.5);
+	margin: 1em .1em 1em 1em
 }
 
 #room-list {
-	float: right;
-	width: 100px;
-	height: 300px;
-	overflow: auto;
-}
-
-#room-list div {
-	border-bottom: 1px solid #eee;
+	margin-top: 1em;
 }
 
 #room-list div:hover {
 	background-color: #ddd;
 }
 
+#available-room {
+	overflow: auto;
+	border-bottom: .5em solid rgba(100, 66, 239, 0.5);
+	border-left: .1em solid rgba(100, 66, 239, 0.5);
+	padding-left: .1em;
+	margin-right: .1em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 #send-message {
-	width: 700px;
-	margin-bottom: 1em;
-	margin-right: 1em;
+	width: 50%
+}
+
+#send-form {
+	margin-left: 1em
 }
 
 #help {
-	font: 10px "Lucida Grande", Helvetica, Arial, sans-serif;
+	font: 75% "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.message {
+	margin: 1em .25em;
+	text-align: right ;
+}
+
+.message span{
+	background-color: rgba(31, 234, 234, 0.3);
+	color: black;	
+	border-radius: 10px;
+	padding: .25em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.friend-message {
+	margin: 1em .25em;
+	text-align: right; ;
+}
+
+.friend-message .main-text {
+	background-color: rgba(31, 100, 234, 0.3);
+	color: black;	
+	border-radius: 10px;
+	padding: .25em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.system-message {
+	margin: 1em .25em;
+	text-align: right;
+}
+
+.system-message .main-text {
+	background-color: rgba(31, 234, 234, 0.3);
+	color: black;	
+	border-radius: 10px;
+	padding: .25em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.user-message {
+	margin: 1em .25em;
+	text-align: left ;
+}
+
+.user-message .main-text {
+	background-color: rgba(31, 31, 234, 0.3);
+	color: black;	
+	border-radius: 10px;
+	padding: .25em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.prompt {
+	font-size: 80%
+}

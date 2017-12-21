@@ -1,9 +1,16 @@
 {
 	"name": "chatrooms",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "Minimalist multiroom chat server",
+	"scripts": {
+		"dev": "nodemon -e html,css ./server.js",
+		"inspect": "nodemon --inspect ./server.js"
+	},
 	"dependencies": {
 		"socket.io": "~0.9.6",
 		"mime": "~1.2.7"
+	},
+	"devDependencies": {
+		"nodemon": "^1.12.7"
 	}
 }
