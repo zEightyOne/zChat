@@ -41,7 +41,7 @@ Chat.prototype.processCommand = function(command) {
 			this.socket.emit('nameAttempt', name); //will cause function(name) defined in socket.on('nameAttempt', function(name)) to be called on the server
 			break;
 		default:
-			message = 'Unrecognized command.';
+			message = {text:'Unrecognized command.',source:'System'};
 			break;
 	}
 	return message;	

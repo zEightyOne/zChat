@@ -3,9 +3,8 @@
 var vueContent = new Vue( {
 	el: '#vue-content',
 	data: {
-		appName: '<a href="/">Growler</a>',
+		name: 'Mudd',
 		appLogo: '/img/logo.jpg',
-		isThirsty: true,
 		sendMessage: '',
 		messages: [],
 		roomList: [],
@@ -30,20 +29,26 @@ var vueContent = new Vue( {
 			socket.on('nameResult', function(result) { //LISTENER for when the server calls emit('nameResult',result)
 				var message;
 				if(result.success) {
-					message = 'You are now known as ' + result.name + '.'; //eg. result = {success: true, name: 'Bob'}
+					vueContent.name = result.name;
+					message = {text:'You are now known as ' + result.name + '.', source:'System'}; //eg. result = {success: true, name: 'Bob'}
 				} else {
-					message = result.message;
+					message = {text:result.message, source:'System'};
 				}
 				vueContent.messages.push(message);
 			});
 
 			socket.on('joinResult', function(result){ //LISTENER for when the server calls emit('joinResult',result)
 				vueContent.room = result.room;
-				vueContent.messages.push('Room changed to ' + result.room);		
+				vueContent.messages.push({text:'Room changed to ' + result.room, source:'System'});		
 			});
 
 			socket.on('message', function(message) { //LISTENER for when the server calls emit('message',message)
-				vueContent.messages.push(message.text);		
+				console.log('Recieved ' + message + 'from the Server')
+				var messageArray = message.text.split(':');
+				var source = messageArray.shift();
+				var content = messageArray.join(':');
+
+				vueContent.messages.push({text:content, source:source});		
 			});
 
 			socket.on('rooms', function(rooms) { //LISTENER for when the server calls emit('rooms', rooms)

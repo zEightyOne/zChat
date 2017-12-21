@@ -21,7 +21,7 @@ function processUserInput() {
 		}
 	}	else {
 		vueContent.chatApp.sendMessage(vueContent.room,message);
-		vueContent.messages.push(message); //Vue automatically escapes data
+		vueContent.messages.push({text:message,source:vueContent.name}); //Vue automatically escapes data
 
 	}
 	vueContent.sendMessage = '';
