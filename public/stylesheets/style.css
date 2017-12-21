@@ -11,7 +11,8 @@ a {
 }
 
 #vue-content {
-	display: flex;
+/*	display: flex; */
+	display: block; 
 	flex-direction: column;
 	box-sizing: border-box;	
 	border: .1em solid rgba(100, 66, 239, 0.5);
@@ -19,19 +20,19 @@ a {
 }
 
 #vue-content img { 
-	flex: 5
+	height: 15%
 }
 
 #vue-content #send-form {
-	flex: 10
+	height: 30%
 }
 
 #vue-content #room {
-	flex: 2
+	height: 5%
 }
 
 #vue-content .outputCenter {
-	flex: 50
+	height: 50% 
 }
 
 .outputCenter {
@@ -48,7 +49,7 @@ a {
 
 #room {
 	background-color: rgba(100, 66, 239, 0.2);
-	padding: 1em;
+	padding: 1em; 
 }
 
 
@@ -68,7 +69,7 @@ a {
 }
 
 #available-room {
-	overflow: scroll;
+	overflow: auto;
 	border-bottom: .5em solid rgba(100, 66, 239, 0.5);
 	border-left: .1em solid rgba(100, 66, 239, 0.5);
 	padding-left: .1em;
