@@ -7,8 +7,9 @@
 		"inspect": "nodemon --inspect ./server.js"
 	},
 	"dependencies": {
+		"mime": "~1.2.7",
 		"socket.io": "~0.9.6",
-		"mime": "~1.2.7"
+		"vue-focus": "^2.1.0"
 	},
 	"devDependencies": {
 		"nodemon": "^1.12.7"

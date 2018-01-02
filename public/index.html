@@ -8,13 +8,13 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
 	<script type="text/javascript" src="https://unpkg.com/vue"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js" ></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-focus/2.1.0/vue-focus.min.js"></script>
 </head>
 <body>
 	<div id='vue-content'>
 		<img alt="Chat" v-bind:class="{logo : true}" v-bind:src="appLogo">
 		<div id='room'>You are currently in {{room}}</div>
-
-		<div class='outputCenter'>		
+		<div class='outputCenter'>				
 			<div ref='refMessages' id='messages'>
 			  <div v-for="message in messages">
 			  	<div v-if="message.source === 'System'">
@@ -40,7 +40,7 @@
 		</div>
 
 		<form id='send-form' v-on:submit.prevent='onFormSubmit'>
-			<input id='send-message' ref='refSendMessage' v-model='sendMessage'/>
+			<input id='send-message' ref='refSendMessage' v-model='sendMessage' v-focus="reviewing" @focus="reviewing = true" @blur="reviewing = false"/>
 			<input id='send-button' type='submit' value='Send'/>
 			<div id='help'>
 				Chat commands:

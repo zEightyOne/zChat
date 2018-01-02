@@ -1,7 +1,6 @@
-
-
 var vueContent = new Vue( {
 	el: '#vue-content',
+	mixins: [ VueFocus.mixin],
 	data: {
 		name: 'Mudd',
 		appLogo: '/img/logo.jpg',
@@ -9,7 +8,8 @@ var vueContent = new Vue( {
 		messages: [],
 		roomList: [],
 		room: '',
-		chatApp: null
+		chatApp: null,
+		reviewing: true
 	},
 	methods: {
 		onRoomListClick: function(e) {
@@ -69,12 +69,14 @@ var vueContent = new Vue( {
 
 			this.$refs.refSendMessage.focus();
 		}
-}, 
+	}, 
 	mounted: function(){
 			this.init();
 		},
 	updated: function(){ //Used for Vue instance updates - for updates at global scope use Vue.nextTick(function() {...}
-		var refMessages = vueContent.$refs.refMessages;
-		refMessages.scrollTop = refMessages.scrollHeight;
+		if(vueContent.reviewing === true) {
+			var refMessages = vueContent.$refs.refMessages;
+			refMessages.scrollTop = refMessages.scrollHeight;	
 		}
+	}
 });
