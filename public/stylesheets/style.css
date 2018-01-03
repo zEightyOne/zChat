@@ -11,9 +11,7 @@ a {
 }
 
 #vue-content {
-/*	display: flex; */
 	display: block; 
-	flex-direction: column;
 	box-sizing: border-box;	
 	border: .1em solid rgba(100, 66, 239, 0.5);
 	height: 100%
@@ -23,16 +21,23 @@ a {
 	height: 15%
 }
 
-#vue-content #send-form {
-	height: 30%
-}
-
 #vue-content #room {
 	height: 5%
 }
 
 #vue-content .outputCenter {
 	height: 50% 
+}
+#vue-content #send-form {
+	height: 10%
+}
+
+#vue-content .status-bar {
+	height: 10%
+}
+
+.status-bar {
+	display: flex;
 }
 
 .outputCenter {
@@ -60,6 +65,13 @@ a {
 	margin: 1em .1em 1em 1em
 }
 
+#status-messages {
+	overflow: auto;
+	background-color: black;
+	border: .1em solid rgba(100, 66, 239, 0.5);
+	margin: 1em .1em 1em 1em
+}
+
 #room-list {
 	margin-top: 1em;
 }
@@ -82,6 +94,7 @@ a {
 }
 
 #send-form {
+	box-sizing: border-box;
 	margin-left: 1em
 }
 
@@ -96,7 +109,7 @@ a {
 
 .message span{
 	background-color: rgba(31, 234, 234, 0.3);
-	color: black;	
+	color: lightgreen;	
 	border-radius: 10px;
 	padding: .25em;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -117,7 +130,7 @@ a {
 
 }
 
-.system-message {
+/*.system-message {
 	margin: 1em .25em;
 	text-align: right;
 }
@@ -128,7 +141,25 @@ a {
 	border-radius: 10px;
 	padding: .25em;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}*/
+
+.system-message {
+/*	margin: 1em .25em;*/
+	text-align: left;
 }
+
+.system-message .main-text {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 75%;	
+	color: lightgreen;	
+	padding-top: .25em;
+/*	background-color: rgba(31, 100, 234, 0.3);
+	color: black;	
+	border-radius: 10px;
+	padding: .25em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);	*/
+}
+
 
 .user-message {
 	margin: 1em .25em;

@@ -23,7 +23,15 @@ var vueContent = new Vue( {
 		init: function(){
 			var socket = io.connect();
 			this.chatApp = new Chat(socket); 
-
+			this.$nextTick(() => {
+				if(!localStorage.getItem('name')) {
+					setUserName();
+				} else 
+				{
+					console.log(localStorage.getItem('name'));
+					this.chatApp.processCommand('/nick ' + localStorage.getItem('name') );
+				}
+			})
 			//EVENT HANDLERS
 
 			socket.on('nameResult', function(result) { //LISTENER for when the server calls emit('nameResult',result)
@@ -78,5 +86,7 @@ var vueContent = new Vue( {
 			var refMessages = vueContent.$refs.refMessages;
 			refMessages.scrollTop = refMessages.scrollHeight;	
 		}
+		var refStatusMessages = vueContent.$refs.refStatusMessages;
+		refStatusMessages.scrollTop = refStatusMessages.scrollHeight;	
 	}
 });

@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" /> <!-- , user-scalable=no" /> -->
 	<link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet"> 	
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">	
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
 	<script type="text/javascript" src="https://unpkg.com/vue"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js" ></script>
@@ -17,17 +18,12 @@
 		<div class='outputCenter'>				
 			<div ref='refMessages' id='messages'>
 			  <div v-for="message in messages">
-			  	<div v-if="message.source === 'System'">
-			  		<div class='system-message'>
-			  			<span class='main-text'>{{ message.text }}</span>
-			  		</div>
-			  	</div>
-			  	<div v-else-if='message.source == name'>
+			  	<div v-if='message.source == name'>
 			  		<div class='user-message'>
 			  			<span class='prompt'>You say:</span><span class='main-text'>{{ message.text }}</span>
 			  		</div>
 			  	</div>
-			  	<div v-else>
+			  	<div v-else-if="message.source != 'System'">
 			  		<div class='friend-message'>
 			  			<span class='prompt'>{{message.source}} says:</span> <span class='main-text'>{{ message.text }}</span>
 			  		</div>
@@ -38,18 +34,28 @@
 				<div id='available-room' v-for="y in roomList">{{ y }}</div>
 			</div>	 		
 		</div>
-
 		<form id='send-form' v-on:submit.prevent='onFormSubmit'>
 			<input id='send-message' ref='refSendMessage' v-model='sendMessage' v-focus="reviewing" @focus="reviewing = true" @blur="reviewing = false"/>
 			<input id='send-button' type='submit' value='Send'/>
-			<div id='help'>
-				Chat commands:
+			<div id='help' v-if='true'>
 				<ul>
-					<li>Change nickname: <code>/nick [username]</code></li>
+<!-- 					<li>Change nickname: <code>/nick [username]</code></li> -->
+					<li><button>Change user</button></li>
 					<li>Join/create room: <code>/join [room name]</code></li>
 				</ul>
 			</div>
 		</form>
+		<div class='status-bar'>
+			<div id='status-messages' ref='refStatusMessages'>
+				<div v-for="message in messages">
+					 <div v-if="message.source === 'System'">
+					  	<div class='system-message'>
+					  		<span class='main-text'>{{ message.text }}</span>
+					  	</div>
+					  </div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script type="text/javascript" src="/javascripts/chat.js"></script>
 	<script type="text/javascript" src="/javascripts/chat_vue.js"></script>
