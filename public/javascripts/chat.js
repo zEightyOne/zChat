@@ -10,6 +10,11 @@ var Chat = function(socket) {
 	};
 */
 
+Chat.prototype.disconnect = function() {
+	console.log('Disconnecting ' + this.socket)
+	this.socket.disconnect();
+};
+
 Chat.prototype.changeRoom = function(room) { 
 	this.socket.emit('join', {
 		newRoom: room

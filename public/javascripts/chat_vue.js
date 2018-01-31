@@ -22,6 +22,7 @@ var vueContent = new Vue( {
 		},
 		init: function(){
 			var socket = io.connect();
+			this.status = 'Connected';
 			this.chatApp = new Chat(socket); 
 			this.$nextTick(() => {
 				if(!localStorage.getItem('name')) {
@@ -40,7 +41,7 @@ var vueContent = new Vue( {
 					vueContent.name = result.name;
 					message = {text:'You are now known as ' + result.name + '.', source:'System'}; //eg. result = {success: true, name: 'Bob'}
 				} else {
-					message = {text:result.message, source:'System'};
+					message = {text:'Unable to change name.', source:'System'};
 				}
 				vueContent.messages.push(message);
 			});

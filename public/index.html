@@ -14,7 +14,7 @@
 <body>
 	<div id='vue-content'>
 		<img alt="Chat" v-bind:class="{logo : true}" v-bind:src="appLogo">
-		<div id='room'>You are currently in {{room}}</div>
+		<div id='room'>Hello {{name}}, you are currently in {{room}}</div>
 		<div class='outputCenter'>				
 			<div ref='refMessages' id='messages'>
 			  <div v-for="message in messages">
