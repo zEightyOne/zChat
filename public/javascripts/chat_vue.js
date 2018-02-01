@@ -9,7 +9,7 @@ var vueContent = new Vue( {
 		roomList: [],
 		room: '',
 		chatApp: null,
-		reviewing: true
+		focused: false
 	},
 	methods: {
 		onRoomListClick: function(e) {
@@ -83,11 +83,12 @@ var vueContent = new Vue( {
 			this.init();
 		},
 	updated: function(){ //Used for Vue instance updates - for updates at global scope use Vue.nextTick(function() {...}
-		if(vueContent.reviewing === true) {
+		if(vueContent.focused === true) { //If the focus is not on the input field, we assume the user is reviewind and therefore doesnt want autoscrolling.
 			var refMessages = vueContent.$refs.refMessages;
-			refMessages.scrollTop = refMessages.scrollHeight;	
+			var refSysMessages = vueContent.$refs.refSysMessages;
+
+			refMessages.scrollTop = refMessages.scrollHeight;
+			refSysMessages.scrollTop = refSysMessages.scrollHeight;	
 		}
-		var refStatusMessages = vueContent.$refs.refStatusMessages;
-		refStatusMessages.scrollTop = refStatusMessages.scrollHeight;	
 	}
 });

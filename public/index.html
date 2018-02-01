@@ -16,7 +16,7 @@
 		<img alt="Chat" v-bind:class="{logo : true}" v-bind:src="appLogo">
 		<div id='room'>Hello {{name}}, you are currently in {{room}}</div>
 		<div class='outputCenter'>				
-			<div ref='refMessages' id='messages'>
+			<div ref='refMessages' id='messages' v-on:mouseover="focused = false"> <!-- If we move the mouse over take focus away from input window -->
 			  <div v-for="message in messages">
 			  	<div v-if='message.source == name'>
 			  		<div class='user-message'>
@@ -35,18 +35,17 @@
 			</div>	 		
 		</div>
 		<form id='send-form' v-on:submit.prevent='onFormSubmit'>
-			<input id='send-message' ref='refSendMessage' v-model='sendMessage' v-focus="reviewing" @focus="reviewing = true" @blur="reviewing = false"/>
+			<input id='send-message' ref='refSendMessage' v-model='sendMessage' v-focus='focused' @focus='focused = true' @blur='focused = false'/> 		
 			<input id='send-button' type='submit' value='Send'/>
 			<div id='help' v-if='true'>
 				<ul>
-<!-- 					<li>Change nickname: <code>/nick [username]</code></li> -->
-					<li><button>Change user</button></li>
-					<li>Join/create room: <code>/join [room name]</code></li>
+					<li><button id='change-user'>Change user</button></li>
+					<li><button id='change-room'>Change room</button></li>
 				</ul>
 			</div>
 		</form>
 		<div class='status-bar'>
-			<div id='status-messages' ref='refStatusMessages'>
+			<div id='status-messages' ref='refSysMessages'>
 				<div v-for="message in messages">
 					 <div v-if="message.source === 'System'">
 					  	<div class='system-message'>

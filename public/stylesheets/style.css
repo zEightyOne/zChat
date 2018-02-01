@@ -17,6 +17,27 @@ a {
 	height: 100%
 }
 
+li {
+line-height: 1.5;
+}
+
+/* Unordered list styles */
+
+ul {
+/*padding-left: 2rem;*/
+list-style-type: none;
+}
+
+ul li {
+padding-left: 2rem;
+background-image: url(/img/star.svg);
+background-position: 0 0;
+background-size: 1.3rem 1.3rem;
+background-repeat: no-repeat;
+}
+
+
+
 #vue-content img { 
 	height: 15%
 }

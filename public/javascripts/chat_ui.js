@@ -20,8 +20,11 @@ function processUserInput() {
 			vueContent.messages.push(systemMessage);
 		}
 	}	else {
-		vueContent.chatApp.sendMessage(vueContent.room,message);
-		vueContent.messages.push({text:message,source:vueContent.name}); //Vue automatically escapes data
+		if(message.length != 0) { 
+			vueContent.chatApp.sendMessage(vueContent.room,message);
+			vueContent.messages.push({text:message,source:vueContent.name}); //Vue automatically escapes data
+		}
+
 
 	}
 	vueContent.sendMessage = '';
@@ -29,9 +32,20 @@ function processUserInput() {
 
 //TODO Replace with Vue Constructs but just to get going
 
-var theButton = document.querySelector('button');
-theButton.onclick = function() {
+var theUserButton = document.querySelector('#change-user');
+theUserButton.onclick = function() {
 	setUserName()
+}
+
+var theRoomButton = document.querySelector('#change-room');
+theRoomButton.onclick = function() {
+	changeRoom()
+}
+
+function changeRoom() {
+	var currentRoom = prompt('Which room do you want to create or join?');
+	localStorage.setItem('room',currentRoom);
+	vueContent.chatApp.processCommand('/join ' + localStorage.getItem('room') );	
 }
 
 function setUserName() {
