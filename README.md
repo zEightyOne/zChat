@@ -18,6 +18,6 @@ node server.js
 
 
 
-Have fun :)
+Have fun (send any feedback to cooper.canada@me.com :)
 
 
