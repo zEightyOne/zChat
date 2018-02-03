@@ -9,7 +9,13 @@ var vueContent = new Vue( {
 		roomList: [],
 		room: '',
 		chatApp: null,
-		focused: false
+		focused: false,
+		newUser: false
+	},
+	filters: {
+		convertTEXT: function(value) {
+			return value.toUpperCase();
+		}
 	},
 	methods: {
 		onRoomListClick: function(e) {
@@ -29,7 +35,6 @@ var vueContent = new Vue( {
 					setUserName();
 				} else 
 				{
-					console.log(localStorage.getItem('name'));
 					this.chatApp.processCommand('/nick ' + localStorage.getItem('name') );
 				}
 			})
@@ -52,7 +57,6 @@ var vueContent = new Vue( {
 			});
 
 			socket.on('message', function(message) { //LISTENER for when the server calls emit('message',message)
-				console.log('Recieved ' + message + 'from the Server')
 				var messageArray = message.text.split(':');
 				var source = messageArray.shift();
 				var content = messageArray.join(':');
@@ -79,6 +83,11 @@ var vueContent = new Vue( {
 			this.$refs.refSendMessage.focus();
 		}
 	}, 
+	watch: {
+		newUser: function(after,before){
+			console.log(after + ' ' + before); //This is just to play with watch
+		}
+	},
 	mounted: function(){
 			this.init();
 		},

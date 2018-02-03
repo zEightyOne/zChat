@@ -4,14 +4,17 @@
 	"description": "Minimalist multiroom chat server",
 	"scripts": {
 		"dev": "nodemon -e html,css ./server.js",
-		"inspect": "nodemon --inspect ./server.js"
+		"nodemon": "nodemon -e html,css ./server.js",
+		"inspect": "nodemon --inspect ./server.js",
+		"lite": "cd ./public ; lite-server"
 	},
 	"dependencies": {
+		"lite-server": "^2.3.0",
 		"mime": "~1.2.7",
 		"socket.io": "~0.9.6",
 		"vue-focus": "^2.1.0"
 	},
 	"devDependencies": {
-		"nodemon": "^1.12.7"
+		"nodemon": "^1.14.12"
 	}
 }

@@ -3,7 +3,7 @@
 <head>
 	<title>Cooper Chat</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" /> <!-- , user-scalable=no" /> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 shrink-to-fit=yes" /> <!-- , user-scalable=no" /> -->
 	<link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet"> 	
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">	
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
@@ -49,7 +49,8 @@
 				<div v-for="message in messages">
 					 <div v-if="message.source === 'System'">
 					  	<div class='system-message'>
-					  		<span class='main-text'>{{ message.text }}</span>
+					  		<span class='main-text'>{{ message.text | convertTEXT}}</span>
+					  		<div v-if="message.text.indexOf(' has joined') !== -1">{{newUser=message.text.split(' ')[1]}}</div>
 					  	</div>
 					  </div>
 				</div>
