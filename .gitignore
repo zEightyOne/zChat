@@ -1,4 +1,5 @@
 *~
+*#
 .DS_Store
 node_modules/
 package-lock.json
@@ -6,3 +7,5 @@ public/.DS_Store
 tmp/
 vue-chat.sublime-project
 vue-chat.sublime-workspace
+.idea/
+chatrooms.iml
