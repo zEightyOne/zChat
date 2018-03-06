@@ -18,7 +18,7 @@ describe('acceptance: ', () => {
   let browserOne, browserTwo;
   let username = 'Sri';
   let randomMessage;
-  let url = 'http://chat.capncanuck.com:3000';
+  let url = 'http://localhost:3000';
   const randomSentenceURL = 'http://watchout4snakes.com/wo4snakes/Random/RandomSentence';
 
   before((done) => {
@@ -41,7 +41,6 @@ describe('acceptance: ', () => {
               .alertText(username)
               .alertAccept()
               .then(setTimeout(() => console.log('One Mississpi.. Two Mississipi..'),500))
-              .waitUntil()
               .getHTML('#room', false)
               .then(room => room.should.equal(`Hello ${username}, you are currently in Lobby`));
       });
