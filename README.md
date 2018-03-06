@@ -1,5 +1,6 @@
-Chat module for Node
-________________________
+[logo]:https://github.com/zEightyOne/chatrooms/blob/master/public/img/logo.jpg
+
+![alt text][logo]#**zChat** 
 
 Chatroom module developed using sockets.io and node.js
 
@@ -14,26 +15,28 @@ From the project root directory:
 
 To run the service:
 
-npm install
-node index.js 
+`npm install`
 
-Tests
+`node index.js `
+
+###**Unit and Acceptance Tests**
 __________
 
 With the service running you have the option of running unit tests and acceptance tests.
 The unit tests are written in mocha/chai
 
-npm test
+`npm test`
 
-To run the acceptance test you must have selenium standalone service running
+To run the acceptance test you must have a [selenium standalone](https://www.seleniumhq.org/download/) server running
 
-java -jar selenium-server-standalone-3.10.0.jar
+`java -jar selenium-server-standalone-3.10.0.jar`
 
-I've only tested agains firefox and in order to do so you need to make sure you have the marrionette driver in your path
+I've only tested against firefox and in order to do so you need to make sure you have the [marionette driver](https://github.com/mozilla/geckodriver/releases) in your path
+
 
 Once done run:
 
-npm run accept
+`npm run accept`
 
 Have fun (send any feedback to cooper.canada@me.com :)
 
