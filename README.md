@@ -1,6 +1,7 @@
 [logo]:https://github.com/zEightyOne/chatrooms/blob/master/public/img/logo.jpg
 
-![alt text][logo]#**zChat** 
+![alt text][logo]
+#zChat 
 
 Chatroom module developed using sockets.io and node.js
 
@@ -19,7 +20,7 @@ To run the service:
 
 `node index.js `
 
-###**Unit and Acceptance Tests**
+###Unit and Acceptance Tests
 __________
 
 With the service running you have the option of running unit tests and acceptance tests.
