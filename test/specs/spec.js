@@ -11,7 +11,7 @@ chai.should();
 // 2) Download the standalone Selinium server https://github.com/mozilla/geckodriver/releases (this is tested with 3.10.0)
 // 3) Run Selenium:         java -jar selenium-server-standalone-3.10.0.jar &
 // 4) Run Chat Server:      node index.js
-// 5) Run Acceptance Tests: node run accept 
+// 5) Run Acceptance Tests: node run accept
 //
 
 describe('acceptance: ', () => {
