@@ -1,7 +1,8 @@
 [logo]:https://github.com/zEightyOne/chatrooms/blob/master/public/img/logo.jpg
 
-![alt text][logo]
+![Live Chat][logo]
 # zChat 
+__________
 
 Chatroom module developed using sockets.io and node.js
 
