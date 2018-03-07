@@ -3,6 +3,8 @@ const chai = require('chai');
 const assert = chai.assert;
 const webdriverio = require('webdriverio');
 chai.should();
+const HOST = process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 3000;
 
 //
 // To run selenium tests on Firefox you need to do the following:
@@ -17,31 +19,33 @@ chai.should();
 describe('acceptance: ', () => {
   let browserOne, browserTwo;
   let username = 'Sri';
-  let randomMessage;
-  let url = process.env.SEL_URL ||'http://localhost:3000';
+  let randomMessage = 'boop';
+  let url = `http://${HOST}:${PORT}`;
   let to = process.env.SEL_TO || 500;
   const randomSentenceURL = 'http://watchout4snakes.com/wo4snakes/Random/RandomSentence';
 
   before((done) => {
-    console.log(`Testing at ${url} : ${to}ms timeout`);
-    webdriverio.remote()
-        .init(done)
-        .url(randomSentenceURL)
-        .getHTML('#result',false).then(result => randomMessage = result.toString())
-        .end(done);
-
     browserOne = webdriverio.remote();
     browserTwo = webdriverio.remote();
     browserTwo.init(done);
     return browserOne.init(done);
   });
+  describe('Utility', () =>
+      it('get random phrase..', () => {
+          console.log(`Testing at ${url} : ${to}ms timeout`);
+          webdriverio.remote()
+              .init()
+              .url(randomSentenceURL)
+              .getHTML('#result',false).then(result => randomMessage = result.toString())
+              .end();
+      }));
   describe('username validation: ', () => {
       it('set/check username...', () => {
           return browserOne
               .url(url)
               .alertText(username)
               .alertAccept()
-              .then(setTimeout(() => console.log('One Mississpi.. Two Mississipi..'),to))
+              .then(setTimeout(() => console.log('Give time to update username..'),to))
               .getText('#room')
               .then(room => room.should.equal(`Hello ${username}, you are currently in Lobby`));
       });
@@ -50,7 +54,6 @@ describe('acceptance: ', () => {
               .url(url)
               .alertText(username)
               .alertAccept()
-              .then(setTimeout(() => console.log('One Mississpi.. Two Mississipi..'),to))
               .getHTML('#room', false)
               .then(room => room.should.not.equal(`Hello ${username}, you are currently in Lobby`));
       });
@@ -66,7 +69,7 @@ describe('acceptance: ', () => {
       it('check if message recieved...',() => {
           return browserTwo
               .url(url)
-              .waitForText('.friend-message .main-text',to)
+              .waitForText('.friend-message .main-text',3000)
               .getText(`.main-text*=${randomMessage}`)
               .then(message => console.log(message));
       });

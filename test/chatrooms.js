@@ -5,9 +5,11 @@ const assert = chai.assert;
 chai.should(); //changes prototypes
 const expect = chai.expect;
 let socket;
+const PORT = process.env.PORT || 3000
+
 
 describe('chatrooms', () => {
-    before(() => socket = io.connect('http://localhost:3000'));
+    before(() => socket = io.connect(`http://localhost:${PORT}`));
     describe('Name validation', () => {
         it('changeName', () => {
             socket.emit('nameAttempt', 'Sri');
