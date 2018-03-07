@@ -18,11 +18,12 @@ describe('acceptance: ', () => {
   let browserOne, browserTwo;
   let username = 'Sri';
   let randomMessage;
-  let url = 'http://localhost:3000';
+  let url = process.env.SEL_URL ||'http://localhost:3000';
+  let to = process.env.SEL_TO || 500;
   const randomSentenceURL = 'http://watchout4snakes.com/wo4snakes/Random/RandomSentence';
 
   before((done) => {
-
+    console.log(`Testing at ${url} : ${to}ms timeout`);
     webdriverio.remote()
         .init(done)
         .url(randomSentenceURL)
@@ -40,8 +41,8 @@ describe('acceptance: ', () => {
               .url(url)
               .alertText(username)
               .alertAccept()
-              .then(setTimeout(() => console.log('One Mississpi.. Two Mississipi..'),500))
-              .getHTML('#room', false)
+              .then(setTimeout(() => console.log('One Mississpi.. Two Mississipi..'),to))
+              .getText('#room')
               .then(room => room.should.equal(`Hello ${username}, you are currently in Lobby`));
       });
       it('check duplicate handling', () => {
@@ -49,7 +50,7 @@ describe('acceptance: ', () => {
               .url(url)
               .alertText(username)
               .alertAccept()
-              .then(setTimeout(() => console.log('One Mississpi.. Two Mississipi..'),500))
+              .then(setTimeout(() => console.log('One Mississpi.. Two Mississipi..'),to))
               .getHTML('#room', false)
               .then(room => room.should.not.equal(`Hello ${username}, you are currently in Lobby`));
       });
@@ -58,14 +59,14 @@ describe('acceptance: ', () => {
       it('send random message...',() => {
           return browserOne
               .url(url)
-              .waitForExist('#send-message',500)
+              .waitForExist('#send-message',to)
               .setValue('#send-message',randomMessage)
               .click('#send-button');
       });
       it('check if message recieved...',() => {
           return browserTwo
               .url(url)
-              .waitForText('.friend-message .main-text',3000)
+              .waitForText('.friend-message .main-text',to)
               .getText(`.main-text*=${randomMessage}`)
               .then(message => console.log(message));
       });
