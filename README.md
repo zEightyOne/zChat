@@ -45,4 +45,39 @@ Once done run:
 
 Have fun (send any feedback to cooper.canada@me.com :)
 
+<br>
 
+## Docker
+__________
+
+Included in the distribution is a basic Dockerfile and .dockerignore
+
+To build and run zChat in a docker container...
+
+First, from the project directory create the image:
+
+`docker build -t zOneEighty/zChat .`
+
+Next run it:
+
+`docker run -p 49160:8080 -d zOneEighty/zChat` 
+
+To check it's running:
+
+`docker ps`
+
+<br>
+
+## Upstart
+__________
+
+Included in etc/init there is a Upstart init file for production deployments
+It includes the following call:
+
+`exec /usr/bin/forever start /home/ec2-user/chatrooms/index.js`
+
+But this can be replaced with
+
+`exec /usr/bin/node /home/ec2-user/chatrooms/index.js`
+
+if you don't want to use Forever. 

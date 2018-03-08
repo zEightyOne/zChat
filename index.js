@@ -1,7 +1,10 @@
 const http = require('http');
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
 const fs = require('fs');
 const path = require('path');
 const mime = require('mime');
+const chatServer = require('./lib/chat_server');
 const cache = {};
 const PORT = process.env.PORT || 3000
 
@@ -37,17 +40,13 @@ serveStatic = (response, cache, absPath) => {
     }
 };
 
-const server = http.createServer(function(request, response) {
-    const filePath = (request.url === '/') ? 'public/index.html' : 'public' + request.url;
-    const absPath = './' + filePath;
 
-    serveStatic(response, cache, absPath);
-
-});
-
-server.listen(PORT, function() {
-	console.log(`Server listening on port ${PORT}`);
-});
-
-const chatServer = require('./lib/chat_server');
-chatServer.listen(server);
+chatServer.listen(
+        http.createServer((request, response) => {
+            const filePath = (request.url === '/') ? 'public/index.html' : 'public' + request.url;
+            const absPath = './' + filePath;
+            serveStatic(response, cache, absPath);})
+            .listen(PORT, function() {
+                console.log(`Server listening on port ${PORT}`);
+            })
+);
