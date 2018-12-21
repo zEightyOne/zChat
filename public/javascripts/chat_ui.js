@@ -2,7 +2,7 @@ var numberOfCalls = 1;
 
 
 function divEscapedContentElement(message) {
-	return $('<div></div>').text(message); //Assume this is JQuery's way of creating a div element and inserting escaped text
+	return $('<div></div>').text(message); // creating a div element and inserting escaped text
 }
 
 function divSystemContentElement(message) {
